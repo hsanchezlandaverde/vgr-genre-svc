@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS vgr;
+
+CREATE TABLE IF NOT EXISTS vgr.genres (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(64),
+	created_at DATETIME,
+	updated_at DATETIME,
+	CONSTRAINT name_unique UNIQUE (name)
+);
