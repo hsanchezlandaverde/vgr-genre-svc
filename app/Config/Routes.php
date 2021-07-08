@@ -18,7 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Genres');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -29,10 +29,14 @@ $routes->setAutoRoute(true);
  * Route Definitions
  * --------------------------------------------------------------------
  */
+$routes->get('/',                    'Genres::index');
 
-// We get a performance increase by specifying the default
-// route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('genres',               'Genres::index');
+$routes->get('genres/(:segment)',    'Genres::show/$1');
+$routes->post('genres',              'Genres::create');
+$routes->put('genres/(:segment)',    'Genres::update/$1');
+$routes->delete('genres/(:segment)', 'Genres::delete/$1');
+$routes->post('genres/bulk',         'Genres::createBulk');
 
 /*
  * --------------------------------------------------------------------
