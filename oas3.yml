@@ -1,0 +1,308 @@
+openapi: 3.0.0
+info:
+  description: "This is a catalog service for the Virtual Game Rack project. mantains Genre entity with CRUD operations."
+  version: "1.0.0"
+  title: "vgr-genre-svc"
+  contact:
+    email: "is.hugosl@hotmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+tags:
+  - name: genres
+    description: Everything about genres
+servers:
+  - url: http://localhost:8080
+paths:
+  "/genres":
+    get:
+      tags:
+        - genres
+      summary: Get all genres
+      description: Get all the available genres
+      operationId: GetGenres
+      responses:
+        "200":
+          description: OK. Get genres
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Genre"
+              example:
+                - id: 1
+                  name: Platform games
+                  created_at: "2021-07-06 12:31:19"
+                  updated_at: "2021-07-06 12:31:19"
+                - id: 2
+                  name: Shooter games
+                  created_at: "2021-07-06 12:31:20"
+                  updated_at: "2021-07-06 12:31:20"
+                - id: 3
+                  name: Fighting games
+                  created_at: "2021-07-06 12:31:21"
+                  updated_at: "2021-07-06 12:31:21"
+    post:
+      tags:
+        - genres
+      summary: Create gender
+      description: Create a new gender
+      operationId: CreateGenre
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGenreRequest"
+      responses:
+        "201":
+          description: Created. Get genres
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateGenreResponse"
+        "400":
+          description: BadRequest. Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                status: 400
+                error: "400"
+                messages:
+                  name: The name field is required.
+        "409":
+          description: Conflict. The requested gender already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                status: 409
+                error: "409"
+                messages:
+                  name: Duplicate entry 'MMORPG' for key 'genres.name_unique'
+  "/genres/{id}":
+    get:
+      tags:
+        - genres
+      summary: Get a genre
+      description: Get a genre by its ID
+      operationId: GetGenreByID
+      parameters:
+        - name: id
+          in: path
+          description: ID from the genre to get
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: OK. Get a genre
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Genre"
+        "404":
+          description: NotFound. Genre not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      tags:
+        - genres
+      summary: Update a genre
+      description: Update an existing gender by its ID
+      operationId: UpdateGender
+      parameters:
+        - name: id
+          in: path
+          description: ID from the genre to update
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGenreRequest"
+      responses:
+        "200":
+          description: OK. Successfully updated genre
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Genre"
+        "400":
+          description: BadRequest. Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                status: 400
+                error: "400"
+                messages:
+                  name: The name field is required.
+        "404":
+          description: NotFound. Genre not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: InternalServerError. An unexpected error occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExceptionResponse"
+    delete:
+      tags:
+        - genres
+      summary: Delete a genre
+      description: Delete a genre by its ID
+      operationId: DeleteGenreByID
+      parameters:
+        - name: id
+          in: path
+          description: ID from the genre to delete
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "204":
+          description: NoContent. Successfully deleted genre
+        "404":
+          description: NotFound. Genre not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: InternalServerError. An unexpected error occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExceptionResponse"
+  "/genres/bulk":
+    post:
+      tags:
+        - genres
+      summary: Multiple gender creation
+      description: Create multiple genders from a CSV file
+      operationId: CreateGenreBulk
+      requestBody:
+        description: "CSV File format (first row ignored): `id,name`"
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CreateGenreBulkRequest"
+      responses:
+        "201":
+          description: Created. Get genres
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateGenreBulkResponse"
+        "400":
+          description: BadRequest. Request is not valid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                status: 400
+                error: "400"
+                messages:
+                  name: "Please specify the data in the right format: id,name"
+        "500":
+          description: InternalServerError. An unexpected error occurred
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExceptionResponse"
+components:
+  schemas:
+    Genre:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        name:
+          type: string
+          example: Platform games
+        created_at:
+          type: string
+          example: "2021-07-06 12:31:19"
+        updated_at:
+          type: string
+          example: "2021-07-06 12:31:19"
+    CreateGenreRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: MMORPG
+    CreateGenreResponse:
+      type: object
+      properties:
+        genre_id:
+          type: integer
+          example: 12
+    CreateGenreBulkRequest:
+      type: object
+      properties:
+        genres_list:
+          type: string
+          format: id,name
+    CreateGenreBulkResponse:
+      type: object
+      properties:
+        num_inserts:
+          type: integer
+          example: 66
+    ErrorResponse:
+      type: object
+      properties:
+        status: 
+          type: integer
+          example: 404
+        error: 
+          type: integer
+          example: 404
+        messages: 
+          type: object
+          properties: 
+            error: 
+              type: string
+              example: No genre found with id 13
+    ExceptionResponse:
+      type: object
+      properties:
+        title: 
+          type: string
+          example: ErrorException
+        type: 
+          type: string
+          example: ErrorException
+        code: 
+          type: integer
+          format: int32
+          example: 500
+        message: 
+          type: string
+          example: "fopen(): Filename cannot be empty"
+        file: 
+          type: string
+          example: /home/hsanchez/Projects/vgr/vgr-genre-svc/app/Controllers/Genres.php
+        line: 
+          type: integer
+          format: int32
+          example: 106

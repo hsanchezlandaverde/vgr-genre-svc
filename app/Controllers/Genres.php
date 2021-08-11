@@ -78,6 +78,7 @@ class Genres extends ResourceController {
 		log_message('info', 'name=' . $data['name'] . ' updated_at=' . $data['updated_at']);
 		if (!$this->model->update($id, $data)) {
 			//TODO already not tested, must add a unit test
+			//TODO Check for 409 Conflict
 			return $this->failServerError();
 		}
 		return $this->respond($this->model->find($id), Response::HTTP_OK);
