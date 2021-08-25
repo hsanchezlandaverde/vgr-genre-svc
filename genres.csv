@@ -1,67 +1,41 @@
 id,name
-1,Platform games
-2,Shooter games
-3,Fighting games
-4,Beat 'em up games
-5,Stealth game
-6,Survival games
-7,Rhythm games
-8,Battle Royale games
-9,Survival horror
-10,Metroidvania
-11,Text adventures
-12,Graphic adventures
-13,Visual novels
-14,Interactive movie
-15,Real-time 3D adventures
-16,Action RPG
-17,MMORPG
-18,Roguelikes
-19,Tactical RPG
-20,Role-Play (RPG)
-21,First-person party-based RPG
-22,JRPG
-23,Monster Tamer
-24,Construction and management simulation
-25,Life simulation
-26,Vehicle simulation
-27,4X game
-28,Artillery game
-29,Auto battler (Auto chess)
-30,Multiplayer online battle arena (MOBA)
-31,Real-time strategy (RTS)
-32,Real-time tactics (RTT)
-33,Tower defense
-34,Turn-based strategy (TBS)
-35,Turn-based tactics (TBT)
-36,Wargame
-37,Grand strategy wargame
-38,Racing
-39,Sports-based physical
-40,Competitive
-41,Sports-based fighting
-42,Board game or card game
-43,Breakout clone game
-44,Casual games
-45,Digital collectible card game
-46,Gacha game
-47,Horror game
-48,Idle game
-49,Logic game
-50,Party game
-51,Photography game
-52,Programming game
-53,Trivia game
-54,Typing game
-55,Advergame
-56,Art game
-57,Casual game
-58,Christian game
-59,Educational game
-60,Esports
-61,Exergame
-62,Personalized game
-63,Serious game
-64,Sandbox
-65,Creative
-66,Open world
+1,Action
+2,Platformer
+3,Shooter
+4,Fighting
+5,Beat'em up
+6,Stealth
+7,Survival
+8,Rhythm
+9,Action-adventure
+10,Survival horror
+11,Metroidvania
+12,Adventures
+13,Text adventures
+14,Graphic adventures
+15,Visual novels
+16,Sandbox
+17,Open world
+18,Role-playing (RPG)
+19,Action RPG
+20,Massively multiplayer online role-playing (MMORPG)
+21,Roguelike
+22,Tactical RPG
+23,Simulation
+24,Real-time strategy (RTS)
+25,Real-time tactics (RTT)
+26,Multiplayer online battle arena (MOBA)
+27,Tower defense
+28,Turn-based strategy (TBS)
+29,Turn-based tactics (TBT)
+30,Battle royale
+31,Sports
+32,Racing
+33,Puzzle
+34,Trivia
+35,Cards
+36,Casual
+37,Party
+38,Massive multiplayer online (MMO)
+39,Educational
+40,Religion

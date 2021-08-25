@@ -12,7 +12,7 @@ tags:
   - name: genres
     description: Everything about genres
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8091
 paths:
   "/genres":
     get:

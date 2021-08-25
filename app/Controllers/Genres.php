@@ -44,8 +44,6 @@ class Genres extends ResourceController {
 		}
 		$data = [
 			'name' => $this->request->getVar('name'),
-			'created_at' => get_current_datetime(),
-			'updated_at' => get_current_datetime(),
 		];
 		try {
 			$genre_id = $this->model->insert($data);
@@ -73,9 +71,8 @@ class Genres extends ResourceController {
 		}
 		$data = [
 			'name' => $this->request->getVar('name'),
-			'updated_at' => get_current_datetime(),
 		];
-		log_message('info', 'name=' . $data['name'] . ' updated_at=' . $data['updated_at']);
+		log_message('info', 'name=' . $data['name']);
 		if (!$this->model->update($id, $data)) {
 			//TODO already not tested, must add a unit test
 			//TODO Check for 409 Conflict
@@ -111,8 +108,6 @@ class Genres extends ResourceController {
 			}
 			$genre = [
 				'name' => $row[1],
-				'created_at' => get_current_datetime(),
-				'updated_at' => get_current_datetime(),
 			];
 			array_push($data, $genre);
 			log_message('debug', "createBulk - name={name}, created_at={created_at}, updated_at={updated_at}", $genre);
